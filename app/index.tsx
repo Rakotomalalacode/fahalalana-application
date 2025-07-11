@@ -3,6 +3,7 @@ import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 import { LoadingView } from "./LoadingView";
 
+
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>

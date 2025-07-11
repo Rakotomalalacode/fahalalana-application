@@ -1,0 +1,82 @@
+Pour transformer un fichier `.aab` (Android App Bundle) en `.apk` (Android Package) localement, tu dois utiliser **bundletool**, l'outil officiel fourni par Google.
+
+---
+
+### ✅ Étapes pour convertir `.aab` en `.apk` localement
+
+---
+
+#### 1. 📦 **Télécharge `bundletool`**
+
+Télécharge la dernière version ici :
+👉 [https://github.com/google/bundletool/releases](https://github.com/google/bundletool/releases)
+
+Garde le fichier `.jar` quelque part accessible, par exemple : `/home/tahina/bundletool.jar`.
+
+---
+
+#### 2. 🔧 **Génère un keystore si tu n’en as pas déjà**
+
+```bash
+keytool -genkeypair -v \
+  -keystore my-release-key.jks \
+  -keyalg RSA -keysize 2048 -validity 10000 \
+  -alias my-key-alias
+```
+
+---
+
+#### 3. 🛠️ **Crée un APK à partir du `.aab`**
+
+Remplace les chemins et infos selon ton cas :
+
+```bash
+java -jar bundletool.jar build-apks \
+  --bundle=/chemin/vers/ton_app.aab \
+  --output=/chemin/vers/ton_app.apks \
+  --mode=universal \
+  --ks=/chemin/vers/my-release-key.jks \
+  --ks-key-alias=my-key-alias \
+  --ks-pass=pass:motdepassedukeystore \
+  --key-pass=pass:motdepassedukey
+```
+
+📝 L'option `--mode=universal` permet de générer un APK universel compatible avec tous les appareils (sinon tu obtiens des APKs multiples pour chaque config).
+
+---
+
+#### 4. 📂 **Extraire le `.apk` depuis le `.apks`**
+
+Une fois le fichier `.apks` généré (c’est un fichier ZIP), décompresse-le :
+
+```bash
+unzip ton_app.apks -d dossier_apks
+```
+
+Tu y trouveras un fichier comme `universal.apk` dans `dossier_apks/universal/`.
+
+---
+
+#### 5. 📱 **Installer l’APK sur ton appareil**
+
+Connecte ton appareil en USB ou utilise un émulateur, puis :
+
+```bash
+adb install dossier_apks/universal/universal.apk
+```
+
+---
+
+### 📌 Résumé rapide
+
+| Étape                   | Commande                                                           |
+| ----------------------- | ------------------------------------------------------------------ |
+| Télécharger bundletool  | [GitHub Bundletool](https://github.com/google/bundletool/releases) |
+| Générer un keystore     | `keytool -genkeypair ...`                                          |
+| Convertir .aab en .apks | `java -jar bundletool.jar build-apks ...`                          |
+| Extraire `.apk`         | `unzip ton_app.apks`                                               |
+| Installer               | `adb install universal.apk`                                        |
+
+---
+
+Si tu veux, je peux te faire un petit script Bash pour automatiser tout ça 👀. Tu veux ?
