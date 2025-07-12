@@ -80,3 +80,82 @@ adb install dossier_apks/universal/universal.apk
 ---
 
 Si tu veux, je peux te faire un petit script Bash pour automatiser tout ça 👀. Tu veux ?
+
+
+
+npx eas build -p android --profile production
+
+
+
+
+
+
+Installation///******************************
+
+
+Pour **installer un fichier `.deb`**, voici plusieurs méthodes possibles sur Ubuntu ou Debian :
+
+---
+
+### ✅ 1. **Avec `dpkg` (classique)**
+
+```bash
+sudo dpkg -i nom_du_fichier.deb
+```
+
+👉 Exemple :
+
+```bash
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+```
+
+⚠️ S'il manque des dépendances, corrige-les ensuite avec :
+
+```bash
+sudo apt -f install
+```
+
+---
+
+### ✅ 2. **Avec `apt` (recommandé, gère les dépendances)**
+
+```bash
+sudo apt install ./nom_du_fichier.deb
+```
+
+👉 Exemple :
+
+```bash
+sudo apt install ./vscode.deb
+```
+
+> Le `./` est important si le fichier est dans le dossier actuel.
+
+---
+
+### ✅ 3. **Avec `gdebi` (facultatif mais pratique)**
+
+> Si tu veux une interface plus propre qui gère bien les dépendances :
+
+1. Installe `gdebi` :
+
+   ```bash
+   sudo apt install gdebi
+   ```
+
+2. Puis :
+
+   ```bash
+   sudo gdebi nom_du_fichier.deb
+   ```
+
+---
+
+### ✅ 4. **Double-clic graphique (GUI)**
+
+* Tu peux aussi simplement **double-cliquer** sur le `.deb` depuis ton explorateur de fichiers.
+* Cela ouvrira normalement **l’Installateur de logiciels Ubuntu**, tu cliques sur **"Installer"**.
+
+---
+
+Tu veux installer quel `.deb` précisément ? Je peux te donner la commande complète 👍

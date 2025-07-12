@@ -1,9 +1,9 @@
 import React from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-export const LoadingView = () => (
+const LoadingView = () => (
   <View style={styles.loadingContainer}>
-    <ActivityIndicator size="large" color="#6C63FF" /> 
+    <ActivityIndicator size="large" color="#6C63FF" />
   </View>
 );
 
@@ -14,9 +14,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#fff", // ou #000 selon ton thème
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     zIndex: 999,
   },
 });
+
+export default LoadingView;
